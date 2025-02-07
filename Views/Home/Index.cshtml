@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-none d-sm-none d-md-block col-lg-3 p-0">
+            <div class="bd-example-offcanvas">
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasLabel">All files</h5>
+
+                    </div>
+                    <div class="offcanvas-body flex-column pt-2 py-lg-0">
+                       @*  <ul class="list-group list-group-flush">
+                            @foreach (var file in ViewBag.Files)
+                            {
+                                <li class="list-group-item"><a class="nav-item" href="@Url.Action("ViewFile","Markdown", new { fileName = file })">@file</a></li>
+                            }
+
+                        </ul>  *@  
+                        @await Component.InvokeAsync("MarkdownFileList")
+                    </div>
+                </div>
+
+            </div>
+
+            
+
+        </div>
+        <div class="col-lg-9 col-xs-12">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2">
+                <a class="btn btn-primary me-md-2" role="button" href="@Url.Action("Index","Markdown")">Add file</a>
+                
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasLabel">All files</h5>
+
+    </div>
+    <div class="offcanvas-body flex-column pt-2 py-lg-0">
+        @* <ul class="list-group list-group-flush">
+            @foreach (var file in ViewBag.Files)
+            {
+                <li class="list-group-item"><a class="nav-item" href="@Url.Action("ViewFile","Markdown", new { fileName = file })">@file</a></li>
+            }
+
+        </ul> *@
+        @await Component.InvokeAsync("MarkdownFileList")
+    </div>
+</div>

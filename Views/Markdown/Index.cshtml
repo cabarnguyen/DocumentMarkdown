@@ -1,0 +1,85 @@
+﻿@section Scripts{
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <script>
+        var simplemde = new SimpleMDE({ element: document.getElementById("markdown-editor") });
+    </script>
+
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-none d-sm-none d-md-block col-lg-3 p-0">
+            <div class="bd-example-offcanvas">
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasLabel">All files</h5>
+
+                    </div>
+                    <div class="offcanvas-body flex-column pt-2 py-lg-0">
+                        <ul class="list-group list-group-flush">
+                           @*  @foreach (var file in ViewBag.Files)
+                            {
+                                <li class="list-group-item"><a class="nav-item" href="@Url.Action("ViewFile","Markdown", new { fileName = file })">@file</a></li>
+                            } *@
+                            @await Component.InvokeAsync("MarkdownFileList")
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+        <div class="col-lg-9 col-xs-12">
+            <div class="mt-2">
+                @using (Html.BeginForm("Convert", "Markdown", FormMethod.Post))
+                {
+                    <input type="text" name="fileName" placeholder="Enter file name" value="@ViewBag.FileName" required class="form-control" />
+                    <br />
+                    <input type="text" name="title" placeholder="Enter title" value="@ViewBag.Title" required class="form-control" />
+                    <br />
+                    <input type="date" name="publishOn" value="@ViewBag.PublishOn?.ToString("yyyy-MM-dd")" required class="form-control" />
+                    <br />
+                    <input type="text" name="category" placeholder="Enter category" value="@ViewBag.Category" required class="form-control" />
+                    <br />
+
+
+                    @* <input type="text" name="fileName" placeholder="Enter file name" value="@ViewBag.FileName" class="form-control" required /> *@
+                    <br />
+                    <textarea id="markdown-editor" name="markdownText">@ViewBag.MarkdownText</textarea>
+                    <br />
+                    <input type="submit" value="Render" />
+                }
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasLabel">All files</h5>
+
+    </div>
+    <div class="offcanvas-body flex-column pt-2 py-lg-0">
+        <ul class="list-group list-group-flush">
+           @*  @foreach (var file in ViewBag.Files)
+            {
+                <li class="list-group-item"><a class="nav-item" href="@Url.Action("ViewFile","Markdown", new { fileName = file })">@file</a></li>
+            } *@
+            @await Component.InvokeAsync("MarkdownFileList")
+        </ul>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+

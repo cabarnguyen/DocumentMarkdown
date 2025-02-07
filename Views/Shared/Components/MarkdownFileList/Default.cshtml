@@ -1,0 +1,13 @@
+﻿@model List<IGrouping<string, MarkdownFileMetadata>>
+
+
+@foreach (var group in Model)
+{
+    <h6>@group.Key</h6>
+    <ul class="list-group list-group-flush">
+        @foreach (var file in group)
+        {
+            <li class="list-group-item"><a class="nav-item text-decoration-none" href="@Url.Action("ViewFile","Markdown", new { fileName = file.FilePath })">@file.Title</a></li>
+        }
+    </ul>
+}
